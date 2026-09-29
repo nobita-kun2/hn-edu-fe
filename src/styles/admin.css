@@ -62,8 +62,24 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Opt-in modifier for pages that stack several related tables and need their
+   columns to line up across tables (e.g. "Tên lớp" always starting at the
+   same x position). Plain .admin-table intentionally auto-sizes per table,
+   which is fine standalone but drifts when tables are stacked. Pair with
+   <colgroup> widths matched across the tables that should align. */
+.admin-table--aligned {
+  table-layout: fixed;
+}
+
+.admin-table--aligned th,
+.admin-table--aligned td {
+  white-space: normal;
+  word-break: break-word;
+}
+
 .admin-actions {
   display: flex;
+  flex-wrap: nowrap;
   gap: 8px;
 }
 
@@ -118,8 +134,13 @@
 }
 
 .admin-btn--neutral {
-  background: var(--color-surface-muted);
+  /* Tinted overlay (not a flat surface color) so it stays visible whether it
+     sits on a plain card or on a zebra-striped table row — a flat
+     --color-surface-muted background used to disappear on striped rows,
+     which also use that same token. */
+  background: color-mix(in srgb, var(--color-ink) 10%, transparent);
   color: var(--color-ink);
+  border-color: var(--color-border);
 }
 
 /* Form (create/edit panels, inline within an admin-card) */

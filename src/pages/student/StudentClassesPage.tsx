@@ -128,7 +128,15 @@ export function StudentClassesPage() {
           <p className="admin-hint">Bạn chưa đăng ký lớp học nào.</p>
         ) : (
           <div className="admin-table-wrap">
-            <table className="admin-table">
+            <table className="admin-table admin-table--aligned">
+              <colgroup>
+                <col style={{ width: "16%" }} />
+                <col style={{ width: "20%" }} />
+                <col style={{ width: "14%" }} />
+                <col style={{ width: "14%" }} />
+                <col style={{ width: "14%" }} />
+                <col style={{ width: "22%" }} />
+              </colgroup>
               <thead>
                 <tr>
                   <th>Tên lớp</th>
@@ -197,7 +205,15 @@ export function StudentClassesPage() {
           <p className="admin-hint">Hiện không có lớp nào đang mở đăng ký.</p>
         ) : (
           <div className="admin-table-wrap">
-            <table className="admin-table">
+            <table className="admin-table admin-table--aligned">
+              <colgroup>
+                <col style={{ width: "16%" }} />
+                <col style={{ width: "20%" }} />
+                <col style={{ width: "14%" }} />
+                <col style={{ width: "14%" }} />
+                <col style={{ width: "14%" }} />
+                <col style={{ width: "22%" }} />
+              </colgroup>
               <thead>
                 <tr>
                   <th>Tên lớp</th>
@@ -249,12 +265,20 @@ export function StudentClassesPage() {
           <p className="admin-hint">Không có buổi học nào sắp tới.</p>
         ) : (
           <div className="admin-table-wrap">
-            <table className="admin-table">
+            <table className="admin-table admin-table--aligned">
+              <colgroup>
+                <col style={{ width: "16%" }} />
+                <col style={{ width: "20%" }} />
+                <col style={{ width: "14%" }} />
+                <col style={{ width: "14%" }} />
+                <col style={{ width: "14%" }} />
+                <col style={{ width: "22%" }} />
+              </colgroup>
               <thead>
                 <tr>
                   <th>Lớp</th>
                   <th>Ngày học</th>
-                  <th>Giờ học</th>
+                  <th colSpan={3}>Giờ học</th>
                   <th>Thao tác</th>
                 </tr>
               </thead>
@@ -263,7 +287,7 @@ export function StudentClassesPage() {
                   <tr key={s.id}>
                     <td>{s.className ?? `Lớp #${s.classId}`}</td>
                     <td>{formatDate(s.sessionDate)}</td>
-                    <td className="num">
+                    <td colSpan={3} className="num">
                       {formatTime(s.startTime)} - {formatTime(s.endTime)}
                     </td>
                     <td>

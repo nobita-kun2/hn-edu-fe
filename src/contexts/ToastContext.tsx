@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState, type ReactNode } from "react";
+import { createContext, useCallback, useEffect, useState, type ReactNode } from "react";
 import "./Toast.css";
 
 type ToastType = "success" | "error";
@@ -17,6 +17,14 @@ export const ToastContext = createContext<ToastContextValue | null>(null);
 
 const AUTO_DISMISS_MS = 4000;
 
+// Lets non-React modules (e.g. the axios interceptor in api.ts, which runs
+// outside the component tree) trigger a toast without needing a hook.
+let globalShowToast: ((message: string, type?: ToastType) => void) | null = null;
+
+export function showGlobalToast(message: string, type: ToastType = "error") {
+  globalShowToast?.(message, type);
+}
+
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
@@ -27,6 +35,13 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       setToasts((prev) => prev.filter((t) => t.id !== id));
     }, AUTO_DISMISS_MS);
   }, []);
+
+  useEffect(() => {
+    globalShowToast = showToast;
+    return () => {
+      globalShowToast = null;
+    };
+  }, [showToast]);
 
   return (
     <ToastContext.Provider value={{ showToast }}>

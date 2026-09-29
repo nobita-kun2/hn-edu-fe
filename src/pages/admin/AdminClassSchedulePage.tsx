@@ -342,55 +342,55 @@ export function AdminClassSchedulePage() {
                         >
                           Học liệu
                         </button>
+                        {s.status === "PENDING_APPROVAL" && (
+                          <>
+                            <button
+                              type="button"
+                              className="admin-btn admin-btn--success"
+                              disabled={pendingActionId === s.id}
+                              onClick={() => handleApprove(s.id)}
+                            >
+                              Duyệt
+                            </button>
+                            <button
+                              type="button"
+                              className="admin-btn admin-btn--danger"
+                              disabled={pendingActionId === s.id}
+                              onClick={() => handleReject(s.id)}
+                            >
+                              Từ chối
+                            </button>
+                          </>
+                        )}
+                        {s.status === "SCHEDULED" && (
+                          <>
+                            <button
+                              type="button"
+                              className="admin-btn admin-btn--neutral"
+                              disabled={pendingActionId === s.id}
+                              onClick={() => openEditForm(s)}
+                            >
+                              Dời lịch
+                            </button>
+                            <button
+                              type="button"
+                              className="admin-btn admin-btn--success"
+                              disabled={pendingActionId === s.id}
+                              onClick={() => handleComplete(s.id)}
+                            >
+                              Hoàn thành
+                            </button>
+                            <button
+                              type="button"
+                              className="admin-btn admin-btn--danger"
+                              disabled={pendingActionId === s.id}
+                              onClick={() => handleCancel(s.id)}
+                            >
+                              Huỷ
+                            </button>
+                          </>
+                        )}
                       </div>
-                      {s.status === "PENDING_APPROVAL" && (
-                        <div className="admin-actions">
-                          <button
-                            type="button"
-                            className="admin-btn admin-btn--success"
-                            disabled={pendingActionId === s.id}
-                            onClick={() => handleApprove(s.id)}
-                          >
-                            Duyệt
-                          </button>
-                          <button
-                            type="button"
-                            className="admin-btn admin-btn--danger"
-                            disabled={pendingActionId === s.id}
-                            onClick={() => handleReject(s.id)}
-                          >
-                            Từ chối
-                          </button>
-                        </div>
-                      )}
-                      {s.status === "SCHEDULED" && (
-                        <div className="admin-actions">
-                          <button
-                            type="button"
-                            className="admin-btn admin-btn--neutral"
-                            disabled={pendingActionId === s.id}
-                            onClick={() => openEditForm(s)}
-                          >
-                            Dời lịch
-                          </button>
-                          <button
-                            type="button"
-                            className="admin-btn admin-btn--success"
-                            disabled={pendingActionId === s.id}
-                            onClick={() => handleComplete(s.id)}
-                          >
-                            Hoàn thành
-                          </button>
-                          <button
-                            type="button"
-                            className="admin-btn admin-btn--danger"
-                            disabled={pendingActionId === s.id}
-                            onClick={() => handleCancel(s.id)}
-                          >
-                            Huỷ
-                          </button>
-                        </div>
-                      )}
                     </td>
                   </tr>
                 ))}

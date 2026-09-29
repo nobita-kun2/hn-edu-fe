@@ -3,6 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useTheme } from "../../hooks/useTheme";
 import { BrandMark } from "../common/BrandMark";
+import { NotificationBell } from "../common/NotificationBell";
 import { ROLES } from "../../utils/constants";
 import type { UserRole } from "../../types/user.types";
 import "./MainLayout.css";
@@ -197,6 +198,7 @@ export function MainLayout() {
 
         {user && (
           <div className="app-header-right">
+            <NotificationBell />
             <button
               type="button"
               className="app-header-theme-btn"
